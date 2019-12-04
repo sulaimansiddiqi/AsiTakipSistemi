@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "400593536764",
+    "firebase_url": "https://asitakipsistemi-c1d61.firebaseio.com",
+    "project_id": "asitakipsistemi-c1d61",
+    "storage_bucket": "asitakipsistemi-c1d61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400593536764:android:dff77cb043c703f5dd3979",
+        "android_client_info": {
+          "package_name": "com.example.asitakipson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400593536764-40ncjbnfatolak3hnc24loim8rf0b2u0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asitakipson",
+            "certificate_hash": "5737feaa29ae4147a3de6b4698ddd07ff5c81e45"
+          }
+        },
+        {
+          "client_id": "400593536764-hcjncdaq2o466j4tvupj07nt5vsomunt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG2pojmv-rrk_ywXLr33b-SP_R-HsdtJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400593536764-hcjncdaq2o466j4tvupj07nt5vsomunt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
