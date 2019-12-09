@@ -3,6 +3,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,7 +34,10 @@ public class AsiEkle extends AppCompatActivity {
         editTextAsiID = findViewById(R.id.EditTextAsiID);
         editTextHastahaneAdi = findViewById(R.id.EditTextHastahane);
         editTextAsiTarihi=findViewById(R.id.EditTextAsiTarihi);
+        editTextAsiTarihi.addTextChangedListener(new DateMask());
         String eMail;
+
+
 
         if(uID!=null){
             db = FirebaseDatabase.getInstance().getReference(uID).child("Asilar");
@@ -50,7 +55,7 @@ public class AsiEkle extends AppCompatActivity {
         asi.setHastahaneAdi(editTextHastahaneAdi.getText().toString());
         asi.setAsiTarih(editTextAsiTarihi.getText().toString());
         db.push().setValue(asi);
-        
+
 
     }
 

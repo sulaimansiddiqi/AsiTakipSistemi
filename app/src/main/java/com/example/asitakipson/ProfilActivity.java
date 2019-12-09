@@ -66,7 +66,16 @@ public class ProfilActivity extends AppCompatActivity {
         uID = mAuth.getUid();
 
     }
+    @Override
+    protected  void onStart(){
+        super.onStart();
+        if(mAuth.getCurrentUser()==null){
 
+            finish();
+            startActivity(new Intent(this,MainActivity.class));
+        }
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
