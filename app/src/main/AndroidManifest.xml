@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UyeOlActivity"></activity>
+        <activity android:name=".AsiEkle"></activity>
+        <activity android:name=".AsiListele" />
+        <activity android:name=".UyeOlActivity" />
         <activity android:name=".ProfilActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

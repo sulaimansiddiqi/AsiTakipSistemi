@@ -155,6 +155,21 @@ public class ProfilActivity extends AppCompatActivity {
 
         }
     }
+    public void buttonAsiKaydet(View v) {
+
+        Intent i = new Intent(getApplicationContext(),AsiEkle.class);
+        i.putExtra("sendUD",uID);
+        startActivity(i);
+    }
+
+    public void buttonAsiListele(View v){
+
+        Intent i = new Intent(getApplicationContext(),AsiListele.class);
+        i.putExtra("sendUD",uID);
+        startActivity(i);
+
+    }
+
 
 
 
