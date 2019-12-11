@@ -63,10 +63,10 @@ public class CustomAdapter extends ArrayAdapter<Asi> {
 
         }
         Asi k =AsiList.get(position);
-        TextView AsiId =(TextView)v.findViewById(R.id.adi_label);
-        TextView AsiTarihi=(TextView)v.findViewById(R.id.dyeri_label);
-        TextView HastahaneAdi=(TextView)v.findViewById(R.id.dyeri_label);
-        AsiId.setText(k.getAsiID());
+        TextView asiAdi =(TextView)v.findViewById(R.id.asiAdi_label);
+        TextView AsiTarihi=(TextView)v.findViewById(R.id.tarih_label);
+        TextView HastahaneAdi=(TextView)v.findViewById(R.id.hastahane_label);
+        asiAdi.setText(k.getAsiAdi());
         AsiTarihi.setText(k.getAsiTarih());
         HastahaneAdi.setText(k.getHastahaneAdi());
         return  v;

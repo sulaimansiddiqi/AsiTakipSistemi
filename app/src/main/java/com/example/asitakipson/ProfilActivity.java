@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -64,18 +65,36 @@ public class ProfilActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Bundle extras = getIntent().getExtras();
         uID = mAuth.getUid();
+        kullaniciBilgiGetir();
 
     }
     @Override
-    protected  void onStart(){
+    protected void onStart() {
         super.onStart();
         if(mAuth.getCurrentUser()==null){
-
             finish();
             startActivity(new Intent(this,MainActivity.class));
         }
+    }
+
+    private void kullaniciBilgiGetir() {
+        FirebaseUser user = mAuth.getCurrentUser();
+       if(user!=null) {
+           if (user.getPhotoUrl() != null) {
+
+               Glide.with(this)
+                       .load(user.getPhotoUrl().toString())
+                       .into(imageView);
+           }
+           if (user.getDisplayName() != null) {
+
+               editText.setText(user.getDisplayName());
+           }
+       }
 
     }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

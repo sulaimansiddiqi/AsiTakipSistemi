@@ -3,6 +3,7 @@ package com.example.asitakipson;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -68,7 +69,8 @@ public class UyeOlActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Kullanıcı Kaydedildi", Toast.LENGTH_SHORT).show();
-
+                    finish();
+                    startActivity(new Intent(UyeOlActivity.this,MainActivity.class));
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
 

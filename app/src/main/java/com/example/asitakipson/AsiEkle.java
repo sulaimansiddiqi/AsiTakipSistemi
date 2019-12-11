@@ -19,7 +19,7 @@ public class AsiEkle extends AppCompatActivity {
 
 
     DatabaseReference db;
-    EditText editTextAsiID;
+    EditText editTextAsiAdi;
     EditText editTextHastahaneAdi;
     EditText editTextAsiTarihi;
     @Override
@@ -31,7 +31,7 @@ public class AsiEkle extends AppCompatActivity {
         String uID = extras.getString("sendUD");
         Toast.makeText(this, uID, Toast.LENGTH_SHORT).show();
 
-        editTextAsiID = findViewById(R.id.EditTextAsiID);
+        editTextAsiAdi = findViewById(R.id.EditTextAsiAdi);
         editTextHastahaneAdi = findViewById(R.id.EditTextHastahane);
         editTextAsiTarihi=findViewById(R.id.EditTextAsiTarihi);
         editTextAsiTarihi.addTextChangedListener(new DateMask());
@@ -51,7 +51,7 @@ public class AsiEkle extends AppCompatActivity {
     public void btnAsiKaydet(View button) {
 
         Asi asi = new Asi();
-        asi.setAsiID(editTextAsiID.getText().toString());
+        asi.setAsiAdi(editTextAsiAdi.getText().toString());
         asi.setHastahaneAdi(editTextHastahaneAdi.getText().toString());
         asi.setAsiTarih(editTextAsiTarihi.getText().toString());
         db.push().setValue(asi);

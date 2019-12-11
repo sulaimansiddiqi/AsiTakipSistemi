@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,9 +26,10 @@ public class AsiListele extends AppCompatActivity {
     ListView lv;
     CustomAdapter adapter;
     DatabaseReference db;
-
+    TextView baslikTv;
     List<Asi> AsiList = new ArrayList<>();
     DatabaseReference myRef2;
+    int asiSayisi;
     @Override
 
     protected void onStart() {
@@ -42,12 +44,13 @@ public class AsiListele extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String uID = extras.getString("sendUD");
-        Toast.makeText(this, uID, Toast.LENGTH_SHORT).show();
-        myRef2 = FirebaseDatabase.getInstance().getReference(uID).child("Asilar");
 
+        myRef2 = FirebaseDatabase.getInstance().getReference(uID).child("Asilar");
+        baslikTv=findViewById(R.id.asiBaslik);
         lv = findViewById(R.id.lvListele);
         eMail= user.getEmail().toString();
         getir();
+
 
 
     }
@@ -67,6 +70,9 @@ public class AsiListele extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged();
+                asiSayisi=AsiList.size();
+                String asiText = String.format("Hoş Geldiniz ! %2d Adet Aşınız Listelenmiştir",asiSayisi);
+                baslikTv.setText(asiText);
             }
 
             {

@@ -9,7 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.view.View.OnClickListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextEMail;
     EditText editTextSifre;
     private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser()!=null){
+            finish();
+            startActivity(new Intent(this,ProfilActivity.class));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    finish();
+
                     Intent intent = new Intent(MainActivity.this,ProfilActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
 
 
@@ -80,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }

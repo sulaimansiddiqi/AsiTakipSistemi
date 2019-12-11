@@ -3,25 +3,25 @@ package com.example.asitakipson;
 
 public class Asi {
 
-    private String asiID;
+    private String asiAdi;
     private String hastahaneAdi;
     private String asiTarih;
 
     public Asi() {
     }
 
-    public Asi(String asiID,String hastahaneAdi,String asiTarih) {
+    public Asi(String asiAdi,String hastahaneAdi,String asiTarih) {
 
-        this.asiID=asiID;
+        this.asiAdi=asiAdi;
         this.hastahaneAdi=hastahaneAdi;
         this.asiTarih=asiTarih;
     }
-    public String getAsiID() {
-        return asiID;
+    public String getAsiAdi() {
+        return asiAdi;
     }
 
-    public void setAsiID(String asiID) {
-        this.asiID = asiID;
+    public void setAsiAdi(String asiAdi) {
+        this.asiAdi = asiAdi;
     }
 
     public String getHastahaneAdi() {

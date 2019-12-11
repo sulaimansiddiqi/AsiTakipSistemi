@@ -21,7 +21,7 @@
         </TextView>
 
         <EditText
-            android:id="@+id/EditTextAsiID"
+            android:id="@+id/EditTextAsiAdi"
             android:layout_height="wrap_content"
             android:hint="Aşı ID"
 
