@@ -29,7 +29,7 @@ public class AsiEkle extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String uID = extras.getString("sendUD");
-        Toast.makeText(this, uID, Toast.LENGTH_SHORT).show();
+
 
         editTextAsiAdi = findViewById(R.id.EditTextAsiAdi);
         editTextHastahaneAdi = findViewById(R.id.EditTextHastahane);
@@ -55,6 +55,7 @@ public class AsiEkle extends AppCompatActivity {
         asi.setHastahaneAdi(editTextHastahaneAdi.getText().toString());
         asi.setAsiTarih(editTextAsiTarihi.getText().toString());
         db.push().setValue(asi);
+
 
 
     }

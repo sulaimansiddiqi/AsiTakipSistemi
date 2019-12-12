@@ -10,7 +10,7 @@
         android:id="@+id/asiLayout"
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         >
     <TextView
@@ -23,12 +23,16 @@
         android:textStyle="bold"/>
 
 
-    <ListView
-        android:id="@+id/lvListele"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        <ListView
+            android:id="@+id/lvListele"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+        </ListView>
 
 
     </LinearLayout>
+
+
 </RelativeLayout>

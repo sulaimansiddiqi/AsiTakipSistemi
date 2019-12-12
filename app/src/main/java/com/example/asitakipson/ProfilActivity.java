@@ -4,18 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +55,9 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+
+
+
         firebaseAuth =FirebaseAuth.getInstance();
         editText =(EditText)findViewById(R.id.editTextDisplayName);
         imageView=(ImageView)findViewById(R.id.imageView);
@@ -79,18 +87,18 @@ public class ProfilActivity extends AppCompatActivity {
 
     private void kullaniciBilgiGetir() {
         FirebaseUser user = mAuth.getCurrentUser();
-       if(user!=null) {
-           if (user.getPhotoUrl() != null) {
+        if(user!=null) {
+            if (user.getPhotoUrl() != null) {
 
-               Glide.with(this)
-                       .load(user.getPhotoUrl().toString())
-                       .into(imageView);
-           }
-           if (user.getDisplayName() != null) {
+                Glide.with(this)
+                        .load(user.getPhotoUrl().toString())
+                        .into(imageView);
+            }
+            if (user.getDisplayName() != null) {
 
-               editText.setText(user.getDisplayName());
-           }
-       }
+                editText.setText(user.getDisplayName());
+            }
+        }
 
     }
 
@@ -117,7 +125,7 @@ public class ProfilActivity extends AppCompatActivity {
 
     }
 
-    public  void buttonKaydet(View v){
+    public  void resimKaydet(View v){
 
         resimKaydet();
     }
@@ -140,7 +148,7 @@ public class ProfilActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressBar.setVisibility(View.GONE);
-                            // profileImageUrl = taskSnapshot.getDownloadUrl().toString();
+                            profileImageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -198,7 +206,23 @@ public class ProfilActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+                return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        switch (item.getItemId()){
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this,MainActivity.class));
 
+        }
+        return true;
+    }
 }
