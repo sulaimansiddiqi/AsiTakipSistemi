@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/EditTextAsiIdD"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Aşı Adı"></EditText>
+
+    <EditText
+        android:id="@+id/EditTextHastahaneD"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Hastahane Adı"></EditText>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:text="Tarih:"
+            android:textSize="18sp"></TextView>
+
+        <TextView
+            android:id="@+id/textViewTarihUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Tarihi Seçiniz"
+        android:id="@+id/buttonTarihUpdate"></Button>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonUpdateAsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Güncelle" />
+
+        <Button
+            android:id="@+id/buttonDeleteAsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sil" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

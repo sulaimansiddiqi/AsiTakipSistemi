@@ -1,4 +1,4 @@
-package com.example.asitakipson;
+package com.bakyuz.asitakipson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

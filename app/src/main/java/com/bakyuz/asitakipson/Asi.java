@@ -1,7 +1,8 @@
-package com.example.asitakipson;
+package com.bakyuz.asitakipson;
 
 
 public class Asi {
+    private String asiId;
 
     private String asiAdi;
     private String hastahaneAdi;
@@ -11,7 +12,7 @@ public class Asi {
     }
 
     public Asi(String asiAdi,String hastahaneAdi,String asiTarih) {
-
+        this.asiId = asiId;
         this.asiAdi=asiAdi;
         this.hastahaneAdi=hastahaneAdi;
         this.asiTarih=asiTarih;
@@ -32,7 +33,12 @@ public class Asi {
         this.hastahaneAdi = hastahaneAdi;
     }
 
-
+    public String getAsiId() {
+        return asiId;
+    }
+    public void setAsiId(String asiId) {
+        this.asiId = asiId;
+    }
 
     public String getAsiTarih() {
         return asiTarih;

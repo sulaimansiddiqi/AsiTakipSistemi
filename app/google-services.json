@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:400593536764:android:c2a22e0bd1548b64dd3979",
+        "android_client_info": {
+          "package_name": "com.bakyuz.asitakipson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400593536764-hcjncdaq2o466j4tvupj07nt5vsomunt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG2pojmv-rrk_ywXLr33b-SP_R-HsdtJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400593536764-hcjncdaq2o466j4tvupj07nt5vsomunt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:400593536764:android:dff77cb043c703f5dd3979",
         "android_client_info": {
           "package_name": "com.example.asitakipson"

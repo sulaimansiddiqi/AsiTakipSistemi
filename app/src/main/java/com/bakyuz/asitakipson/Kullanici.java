@@ -1,6 +1,4 @@
-package com.example.asitakipson;
-
-import java.util.Date;
+package com.bakyuz.asitakipson;
 
 public class Kullanici {
 

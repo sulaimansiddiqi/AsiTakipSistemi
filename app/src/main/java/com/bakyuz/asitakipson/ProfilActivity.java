@@ -1,4 +1,4 @@
-package com.example.asitakipson;
+package com.bakyuz.asitakipson;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,12 +10,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,11 +21,11 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -36,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ProfilActivity extends AppCompatActivity {
@@ -49,6 +48,7 @@ public class ProfilActivity extends AppCompatActivity {
     String profileImageUrl;
     FirebaseAuth firebaseAuth;
     String uID;
+    FirebaseUser user;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class ProfilActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Bundle extras = getIntent().getExtras();
         uID = mAuth.getUid();
+        user=mAuth.getCurrentUser();
         kullaniciBilgiGetir();
 
     }
@@ -86,7 +87,7 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     private void kullaniciBilgiGetir() {
-        FirebaseUser user = mAuth.getCurrentUser();
+       // FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null) {
             if (user.getPhotoUrl() != null) {
 
@@ -114,7 +115,7 @@ public class ProfilActivity extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uriProfileImage);
                 imageView.setImageBitmap(bitmap);
-                uploadImageToFirebaseStorage();
+                uploadImageToFirebaseStorage(bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -136,29 +137,43 @@ public class ProfilActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select Profile Image"), CHOOSE_IMAGE  );
     }
-    private void uploadImageToFirebaseStorage(){
+    private void uploadImageToFirebaseStorage(final Bitmap bitmap){
 
-        StorageReference profilFileImageRef =
-                FirebaseStorage.getInstance().getReference("profilepics/"+System.currentTimeMillis()+".jpg");
+        final StorageReference profilFileImageRef =
+                FirebaseStorage.getInstance().getReference("profilepics/"+uID+".jpg");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask  = profilFileImageRef.putBytes(data);
 
-        if(uriProfileImage!=null){
-            progressBar.setVisibility(View.VISIBLE);
-            profilFileImageRef.putFile(uriProfileImage)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressBar.setVisibility(View.GONE);
-                            profileImageUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressBar.setVisibility(View.GONE);
-                        }
-                    });
+        progressBar.setVisibility(View.VISIBLE);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
 
-        }
+                // Continue with the task to get the download URL
+                return profilFileImageRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    profileImageUrl = downloadUri.toString();
+                    //  Toast.makeText(getBaseContext(), "Upload success! URL - " + downloadUri.toString() , Toast.LENGTH_SHORT).show();
+
+                    imageView.setImageBitmap(bitmap);
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    // Handle failures
+                    // ...
+                }
+            }
+        });
+
 
     }
 
@@ -188,6 +203,12 @@ public class ProfilActivity extends AppCompatActivity {
                             }
                         }
                     });
+            new Thread(new Runnable() {
+                @Override
+                public void run() { Glide.get(ProfilActivity.this).clearDiskCache();
+
+                }
+            }).start();
 
         }
     }

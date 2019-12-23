@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:hint="Aşı Tarihi"
             android:inputType="datetime"
+            android:onClick="tarihAc"
             android:layout_width="fill_parent">
         </EditText>
         <Button

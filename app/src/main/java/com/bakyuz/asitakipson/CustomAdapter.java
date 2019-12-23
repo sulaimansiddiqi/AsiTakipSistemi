@@ -1,4 +1,4 @@
-package com.example.asitakipson;
+package com.bakyuz.asitakipson;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.asitakipson;
+package com.bakyuz.asitakipson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

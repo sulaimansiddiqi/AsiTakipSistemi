@@ -47,13 +47,7 @@
             android:layout_width="fill_parent">
         </Button>
 
-        <Button
-            android:id="@+id/ButtonLİstele"
-            android:layout_height="wrap_content"
-            android:text="Listele"
-            android:onClick="btnListele"
-            android:layout_width="fill_parent">
-        </Button>
+
         <ListView
             android:id="@+id/listView1"
             android:layout_width="match_parent"

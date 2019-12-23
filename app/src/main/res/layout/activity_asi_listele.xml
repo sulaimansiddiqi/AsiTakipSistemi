@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
-
+    tools:showIn="@layout/activity_main"
+    tools:context=".AsiListele">
     <LinearLayout
         android:id="@+id/asiLayout"
 
@@ -13,26 +14,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <TextView
-        android:id="@+id/asiBaslik"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="AŞI TAKİP SİSTEMİ"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/asiBaslik"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="AŞI TAKİP SİSTEMİ"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
 
-        <ListView
-            android:id="@+id/lvListele"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-
-        </ListView>
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
 
     </LinearLayout>
 
 
 </RelativeLayout>
+
