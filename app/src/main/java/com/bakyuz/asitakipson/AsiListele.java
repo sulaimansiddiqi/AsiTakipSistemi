@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +32,11 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AsiListele extends AppCompatActivity implements CustomRecyclerViewAdapter.OnNoteListener{
-    String key;
+
     String eMail;
     String uID;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    RecyclerView rcView;
+    RecyclerView recyclerView;
     CustomRecyclerViewAdapter adapter;
     DatabaseReference db;
     TextView baslikTv;
@@ -64,13 +63,13 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
 
         myRef2 = FirebaseDatabase.getInstance().getReference(uID).child("Asilar");
        baslikTv=findViewById(R.id.asiBaslik);
-        rcView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         eMail= user.getEmail().toString();
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rcView.setLayoutManager(mLayoutManager);
-        rcView.setItemAnimator(new DefaultItemAnimator());
-        rcView.setAdapter(adapter);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
         getir();
 
 
@@ -81,20 +80,20 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         Asi asi = AsiList.get(position);
 
 
-       // showUpdateDeleteDialog(asi.getAsiAdi(),asi.getHastahaneAdi(),asi.getAsiTarih());
+       showUpdateDeleteDialog(asi.getAsiId(),asi.getAsiAdi(),asi.getHastahaneAdi(),asi.getAsiTarih());
 
     }
-    private void showUpdateDeleteDialog(String asiName,String asiHastane,String asiTarih) {
+    private void showUpdateDeleteDialog(final String asiId , String asiName, String asiHastane, String asiTarih) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.update_dialog, null);
         dialogBuilder.setView(dialogView);
 
-        final EditText editTextName = dialogView.findViewById(R.id.EditTextAsiIdD);
+        final EditText editTextName = dialogView.findViewById(R.id.EditTextAsiID);
         //editTextName.setHint(asiName);
 
-        final   EditText spinnerGenre =  dialogView.findViewById(R.id.EditTextHastahaneD);
+        final   EditText spinnerGenre =  dialogView.findViewById(R.id.EditTextHastahaneAdi);
         //spinnerGenre.setHint(asiHastane);
         final TextView textViewtarihUpdate = dialogView.findViewById(R.id.textViewTarihUpdate);
 
@@ -133,7 +132,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
                 String genre = spinnerGenre.getText().toString().trim();
                 String tarih = textViewtarihUpdate.getText().toString().trim();
                 if (!TextUtils.isEmpty(asiAdi) && !TextUtils.isEmpty(genre)) {
-                    updateAsi(asiAdi, genre,tarih);
+                    updateAsi(asiId,asiAdi, genre,tarih);
                     b.dismiss();
                 }
             }
@@ -143,7 +142,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
             @Override
             public void onClick(View view) {
 
-                deleteAsi(key);
+                deleteAsi(asiId);
                 b.dismiss();
             }
         });
@@ -154,7 +153,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(uID);
-        Query applesQuery = ref.child("Asilar").child(key);
+        Query applesQuery = ref.child("Asilar").child(id);
 
         applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -176,10 +175,10 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         return true;
     }
 
-    private boolean updateAsi(String asiAdi, String hastahaneAdi,String tarih) {
+    private boolean updateAsi(String id,String asiAdi, String hastahaneAdi,String tarih) {
 
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference(uID).child("Asilar").child(key);
-        Asi asi = new Asi(asiAdi, hastahaneAdi,tarih);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference(uID).child("Asilar").child(id);
+        Asi asi = new Asi(id,asiAdi, hastahaneAdi,tarih);
         dR.setValue(asi);
 
 
@@ -196,7 +195,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
 
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        key = ds.getKey();
+
                         Asi asi1 = ds.getValue(Asi.class);
                         if (asi1 != null) {
                             AsiList.add(asi1);
@@ -218,7 +217,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         });
 
         adapter = new CustomRecyclerViewAdapter(AsiList,this);
-        rcView.setAdapter(adapter);
+       recyclerView.setAdapter(adapter);
     }
 
 

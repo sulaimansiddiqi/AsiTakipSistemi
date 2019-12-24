@@ -23,7 +23,7 @@
         <EditText
             android:id="@+id/EditTextAsiAdi"
             android:layout_height="wrap_content"
-            android:hint="Aşı ID"
+            android:hint="Aşı Türü"
 
             android:layout_width="fill_parent">
         </EditText>

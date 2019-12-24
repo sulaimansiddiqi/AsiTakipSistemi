@@ -11,8 +11,8 @@ public class Asi {
     public Asi() {
     }
 
-    public Asi(String asiAdi,String hastahaneAdi,String asiTarih) {
-        this.asiId = asiId;
+    public Asi(String AsiID,String asiAdi,String hastahaneAdi,String asiTarih) {
+        this.asiId = AsiID;
         this.asiAdi=asiAdi;
         this.hastahaneAdi=hastahaneAdi;
         this.asiTarih=asiTarih;
