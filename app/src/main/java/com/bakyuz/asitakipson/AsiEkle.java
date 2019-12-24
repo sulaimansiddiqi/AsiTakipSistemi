@@ -65,6 +65,7 @@ public class AsiEkle extends AppCompatActivity {
         asi.setAsiAdi(editTextAsiAdi.getText().toString());
         asi.setHastahaneAdi(editTextHastahaneAdi.getText().toString());
         asi.setAsiTarih(editTextAsiTarihi.getText().toString());
+        asi.setAsiDurum(false);
         String asiID =db.push().getKey();
         asi.setAsiId(asiID);
 

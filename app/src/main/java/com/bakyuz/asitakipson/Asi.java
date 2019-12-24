@@ -7,15 +7,17 @@ public class Asi {
     private String asiAdi;
     private String hastahaneAdi;
     private String asiTarih;
+    private Boolean asiDurum;
 
     public Asi() {
     }
 
-    public Asi(String AsiID,String asiAdi,String hastahaneAdi,String asiTarih) {
+    public Asi(String AsiID,String asiAdi,String hastahaneAdi,String asiTarih, Boolean asiDurum) {
         this.asiId = AsiID;
         this.asiAdi=asiAdi;
         this.hastahaneAdi=hastahaneAdi;
         this.asiTarih=asiTarih;
+        this.asiDurum = asiDurum;
     }
     public String getAsiAdi() {
         return asiAdi;
@@ -48,6 +50,8 @@ public class Asi {
         this.asiTarih = asiTarih;
     }
 
+    public  void setAsiDurum(Boolean asiDurum) {this.asiDurum = asiDurum;}
+    public  Boolean getAsiDurum(){return asiDurum;}
 
 
 }

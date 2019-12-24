@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
     int asiSayisi;
     Calendar calendar;
     DatePickerDialog datePickerDialog;
+    Boolean asiDurumu;
+    CheckBox checkBox;
     @Override
 
     protected void onStart() {
@@ -70,6 +73,7 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
         getir();
 
 
@@ -96,11 +100,10 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         final   EditText spinnerGenre =  dialogView.findViewById(R.id.EditTextHastahaneAdi);
         //spinnerGenre.setHint(asiHastane);
         final TextView textViewtarihUpdate = dialogView.findViewById(R.id.textViewTarihUpdate);
-
         final Button buttonUpdate = dialogView.findViewById(R.id.buttonUpdateAsi);
         final  Button buttonDelete = dialogView.findViewById(R.id.buttonDeleteAsi);
         final  Button buttonTarih  = dialogView.findViewById(R.id.buttonTarihUpdate);
-
+        checkBox =dialogView.findViewById(R.id.checkBox);
         buttonTarih.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +111,6 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
-
                 datePickerDialog = new DatePickerDialog(AsiListele.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -131,8 +133,9 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
                 String asiAdi = editTextName.getText().toString().trim();
                 String genre = spinnerGenre.getText().toString().trim();
                 String tarih = textViewtarihUpdate.getText().toString().trim();
+                if(checkBox.isChecked()) asiDurumu=true; else asiDurumu=false;
                 if (!TextUtils.isEmpty(asiAdi) && !TextUtils.isEmpty(genre)) {
-                    updateAsi(asiId,asiAdi, genre,tarih);
+                    updateAsi(asiId,asiAdi, genre,tarih,asiDurumu);
                     b.dismiss();
                 }
             }
@@ -175,10 +178,10 @@ public class AsiListele extends AppCompatActivity implements CustomRecyclerViewA
         return true;
     }
 
-    private boolean updateAsi(String id,String asiAdi, String hastahaneAdi,String tarih) {
+    private boolean updateAsi(String id,String asiAdi, String hastahaneAdi,String tarih,Boolean asiDurumu) {
 
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference(uID).child("Asilar").child(id);
-        Asi asi = new Asi(id,asiAdi, hastahaneAdi,tarih);
+        Asi asi = new Asi(id,asiAdi, hastahaneAdi,tarih,asiDurumu);
         dR.setValue(asi);
 
 

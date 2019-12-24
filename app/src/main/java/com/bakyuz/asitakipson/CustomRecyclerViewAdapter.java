@@ -1,7 +1,9 @@
 package com.bakyuz.asitakipson;
+        import android.graphics.Color;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.widget.CheckBox;
         import android.widget.TextView;
         import androidx.recyclerview.widget.RecyclerView;
         import java.util.List;
@@ -15,7 +17,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public TextView  asiAdi,hastaneAdı,asiTarih;
-
+        TextView asiDurumu;
         OnNoteListener onNoteListener;
 
         public MyViewHolder(View v, OnNoteListener onNoteListener) {
@@ -26,6 +28,7 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
             asiAdi = v.findViewById(R.id.asiAdi_label);
             hastaneAdı = v.findViewById(R.id.hastahane_label);
             asiTarih = v.findViewById(R.id.tarih_label);
+            asiDurumu = v.findViewById(R.id.durum);
 
             v.setOnClickListener(this);
         }
@@ -56,6 +59,17 @@ public class CustomRecyclerViewAdapter extends RecyclerView.Adapter<CustomRecycl
         holder. asiAdi.setText(asi.getAsiAdi());
         holder.hastaneAdı.setText(asi.getHastahaneAdi());
         holder.asiTarih.setText(asi.getAsiTarih());
+       if (asi.getAsiDurum()==true)
+       {
+           holder.asiDurumu.setText("AŞI YAPILDI");
+           holder.asiDurumu.setTextColor(Color.parseColor("#008000"));
+       }else
+       {
+           holder.asiDurumu.setText("AŞI YAPILMADI");
+           holder.asiDurumu.setTextColor(Color.parseColor("#FF0000"));
+       }
+
+
     }
 
     @Override
